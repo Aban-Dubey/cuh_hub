@@ -9,7 +9,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import userRouter from './routes/userRoutes.js';
-// import blogRouter from "./routes/blogRoutes.js";
+import blogRouter from "./routes/blogRoutes.js";
 
 const app = express();
 
@@ -38,7 +38,7 @@ app.get('/',(req,res)=>{
 
 //API routes
 app.use('/api/user', userRouter);
-// app.use('/api/blogs', blogRouter);
+app.use('/api/blogs', blogRouter);
 
 
 //Start server only when database connection in successful
