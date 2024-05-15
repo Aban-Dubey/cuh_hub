@@ -10,6 +10,7 @@ import cors from 'cors';
 
 import userRouter from './routes/userRoutes.js';
 import blogRouter from "./routes/blogRoutes.js";
+import productRouter from "./routes/productRoutes.js";
 
 const app = express();
 
@@ -39,7 +40,7 @@ app.get('/',(req,res)=>{
 //API routes
 app.use('/api/user', userRouter);
 app.use('/api/blogs', blogRouter);
-
+app.use('/api/products',productRouter);
 
 //Start server only when database connection in successful
 connect().then(()=>{

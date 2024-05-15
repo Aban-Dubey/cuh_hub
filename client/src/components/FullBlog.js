@@ -48,7 +48,7 @@ const FullBlog = () => {
   if (!blog) {
     return <p>Loading...</p>;
   }
-
+  
   const blogDate = new Date(blog.timestamp);
   const formattedDate = `${blogDate.toLocaleDateString()}`;
   const formattedTime = `${blogDate.toLocaleTimeString()}`;

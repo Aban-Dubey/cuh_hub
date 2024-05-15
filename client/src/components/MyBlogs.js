@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import styles from '../styles/MyBlogs.module.css';
 import MyBlogCard from './MyBlogCard';
 import toast, { Toaster } from 'react-hot-toast';
 import { fetchUserBlogs } from '../helper/blogHelper';
@@ -46,62 +45,43 @@ function MyBlogs() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <h1 className='text-2xl font-bold h-screen w-screen '>is loading</h1>;
   }
 
   if (error) {
-    return <p>Error fetching blogs: {error.message}</p>;
+    return <h1 className='text-2xl font-bold h-screen w-screen '>Error fetching blogs</h1>;
   }
 
   return (
-    <section className="mb-8">
-  <Toaster position='top-center' reverseOrder={false}></Toaster>
-  <header>
-    <Header />
-  </header>
-  <div className={`mx-auto ${styles.blogContainer} ${styles.container} `}>
-    <div className={`${styles.main}`}>
-      <h1 className="text-2xl font-bold mb-4 text-center text-white">My Blogs</h1> 
-      {userBlogs.length === 0 ? (
-        <p>No blogs found for this user.</p>
-      ) : (
-        <div className="flex flex-wrap justify-center">
-          {userBlogs.map((blog) => (
-            <MyBlogCard key={blog._id} blog={blog} onUpdate={handleUpdate} />
-          ))}
-        </div>
-      )}
+    <section className="mb-8 blog-background">
+    <Toaster position='top-center' reverseOrder={false} />
+    <header>
+      <Header />
+    </header>
+    <div className="mx-auto container blog-container">
+      <div className="main h-screen">
+      <div className="flex justify-center mt-7">
+    <div className="inline-block border border-gray-400 rounded-md px-2 py-1">
+        <h1 className="text-4xl font-bold mb-6 text-center text-white">My Blogs</h1>
     </div>
-  </div>
-  <footer>
-    <Footer />
-  </footer>
-</section>
-/*<section className="mb-8">
-  <Toaster position='top-center' reverseOrder={false}></Toaster>
-  <header>
-    <Header />
-  </header>
-  <div className={`mx-auto ${styles.blogContainer} ${styles.container}`}>
-    <div className={`${styles.main}`}>
-    <div className="bg-brown-500 bg-opacity-75 rounded-md shadow-md py-2 px-4 mb-4 text-center mx-auto" style={{ width: '15%' }}>
-        <h1 className="text-2xl font-bold text-gray-800">My Blogs</h1>
+</div>
+
+        {userBlogs.length === 0 ? (
+          <p className="text-center text-white">No blogs found for this user.</p>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-4">
+            {userBlogs.map((blog) => (
+              <MyBlogCard key={blog._id} blog={blog} onUpdate={handleUpdate} />
+            ))}
+          </div>
+        )}
       </div>
-      {userBlogs.length === 0 ? (
-        <p>No blogs found for this user.</p>
-      ) : (
-        <div className="flex flex-wrap justify-center">
-          {userBlogs.map((blog) => (
-            <MyBlogCard key={blog._id} blog={blog} onUpdate={handleUpdate} />
-          ))}
-        </div>
-      )}
     </div>
-  </div>
-  <footer>
-    <Footer />
-  </footer>
-</section> */
+    <footer>
+      <Footer />
+    </footer>
+  </section>
+  
 
   );
 }

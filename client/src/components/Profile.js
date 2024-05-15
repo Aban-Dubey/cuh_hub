@@ -44,8 +44,8 @@ function Profile() {
         setFile(base64);
     }
 
-    if(isLoading) return <h1 className='text-2xl font-bold'>is loading</h1>;
-    if(serverError) return <h1 className='text-xl text-red-500'>{serverError.message}</h1>
+    if(isLoading) return <h1 className='text-2xl font-bold h-screen w-screen '>is loading</h1>;
+    if(serverError) return <h1 className='text-2xl font-bold h-screen w-screen '>Server Error</h1>;
 
     return (
         <section className="mb-8">

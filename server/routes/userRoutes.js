@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register, login, getUser, generateOtp, verifyOtp, checkResetSession, updateUser, resetPassword } from "../controllers/userControllers.js";
+import { register, login, getUser, generateOtp, verifyOtp, checkResetSession, updateUser, resetPassword, getUserById } from "../controllers/userControllers.js";
 import { registerMail } from "../controllers/mailer.js";
 import auth from "../middleware/auth.js";
 import { verifyUser } from "../middleware/verifyUser.js";
@@ -15,6 +15,7 @@ userRouter.post("/login",verifyUser,login);
 
 //GET routes
 userRouter.get("/getUser/:username",getUser);
+userRouter.get("/getUserById/:userId",getUserById);
 userRouter.get("/generateOTP",verifyUser,localVariables,generateOtp); //Add username as url query like this: http://localhost:8080/api/user/generateOTP?username=AbanDubey
 userRouter.get("/verifyOTP",verifyUser, verifyOtp);
 userRouter.get("/checkResetSession",checkResetSession);

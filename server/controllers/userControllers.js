@@ -1,4 +1,6 @@
 import UserModel from "../model/userModel.js";
+import BlogModel from "../model/blogModel.js";
+import ProductModel from "../model/productModel.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import otpGenerator from 'otp-generator';
@@ -99,6 +101,51 @@ export const getUser = async(req,res,next)=>{
     } catch (error) {
         return res.status(500).send({error: "Cannot find the user."})
     }
+    
+};
+
+export const getUserById = async(req,res,next)=>{
+    const { userId } = req.params;
+
+    try {
+        // Fetch user details excluding the password field
+        let user = await UserModel.findById(userId).select('-password').select('-profile');
+
+        if (!user) {
+            return res.status(404).send({ error: "Cannot find user with given user id." });
+        }
+
+        // Extract user's blogs and products
+        const { blogs, products, ...userData } = user.toObject();
+
+        // Fetch complete details of each blog
+        const fetchedBlogs = await BlogModel.find({ _id: { $in: blogs } });
+
+        // Fetch complete details of each product
+        const fetchedProducts = await ProductModel.find({ _id: { $in: products } });
+
+        return res.status(200).send({
+            userData,
+            blogs: fetchedBlogs,
+            products: fetchedProducts
+        });
+    } catch (error) {
+        console.error('Error fetching user information:', error);
+        return res.status(500).send({ error: "Cannot find the user." });
+    }
+    // const { userId } = req.params;
+    // console.log(userId);
+    // try {
+    //     let user = await UserModel.findById(userId);
+    //     if(!user){
+    //         return res.status(404).send({error: "Cannot find user with given user id."});
+    //     }
+    //     const  {password, ...rest} = Object.assign({}, user.toJSON());
+
+    //     return res.status(201).send(rest);
+    // } catch (error) {
+    //     return res.status(500).send({error: "Cannot find the user."})
+    // }
     
 };
 
