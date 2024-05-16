@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import ProdHeader from './prodHeader';
 import Footer from '../Footer';
+import { toast, Toaster } from 'react-hot-toast';
+
 
 function FullProduct() {
   const [product, setProduct] = useState(null);
@@ -29,12 +31,26 @@ function FullProduct() {
 
   const userName = user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.username;
 
+  // Function to handle chat button click
+  const handleChatButtonClick = () => {
+    if (!user.mobile) {
+      toast.error("Owner does not have a verified mobile number.");
+      return;
+    }
+  
+    // WhatsApp Web URL with phone number and message
+    const whatsappUrl = `https://web.whatsapp.com/send?phone=${user.mobile}&text=Hello%20${userName},%20I%20am%20interested%20in%20your%20product:%20${product.name}`;
+    
+    // Open WhatsApp Web in a new tab
+    window.open(whatsappUrl, '_blank');
+  };
   return (
     <section>
       <header>
         <ProdHeader />
       </header>
       <div className="container mx-auto px-4 py-8 h-screen">
+      <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className="max-w-3xl mx-auto flex bg-white rounded-lg">
           <div className="w-1/2 m-4">
             <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
@@ -53,7 +69,7 @@ function FullProduct() {
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Wishlist
               </button>
-              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={handleChatButtonClick}>
                 Chat
               </button>
             </div>       
@@ -64,7 +80,6 @@ function FullProduct() {
         <Footer />
       </footer>
     </section>
-    
   );
 }
 

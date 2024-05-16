@@ -30,7 +30,6 @@ export const createProduct = async(req,res,next)=>{
 //Get all products
 export const getAllProducts = async (req,res)=>{
     const resultPerPage = 9;
-    console.log(req.query);
     try {
         const productsCount = await Product.countDocuments();
         const apiFeatures = new ApiFeatures(Product.find(),req.query)
@@ -50,7 +49,7 @@ export const getAllProducts = async (req,res)=>{
 //Get single product
 export const getProductDetails = async (req, res, next) => {
     try {
-        const product = await Product.findById(req.params.id).populate('user', 'username firstName lastName');;
+        const product = await Product.findById(req.params.id).populate('user', 'username firstName lastName mobile');;
         if (!product) {
             return res.status(404).send({ error: 'Cannot find the product' });
 
@@ -61,7 +60,8 @@ export const getProductDetails = async (req, res, next) => {
                 _id: product.user._id,
                 username: product.user.username,
                 firstName: product.user.firstName,
-                lastName: product.user.lastName
+                lastName: product.user.lastName,
+                mobile: product.user.mobile
             },
             product
             

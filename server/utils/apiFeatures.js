@@ -4,18 +4,13 @@ class ApiFeatures {
         this.queryStr = queryStr;
     }
 
-    search(){
-        const keyword = this.queryStr.keyword 
-        ? {
-            name: {
-              $regex: this.queryStr.keyword,
-              $options: "i", //our search function will search case insensitively
-            }
+    search() {
+        if (this.queryStr.keyword) {
+          const keyword = new RegExp(this.queryStr.keyword, 'i');
+          this.query = this.query.find({ category: { $regex: keyword } });
         }
-        :{};
-        this.query = this.query.find({...keyword});
         return this;
-    }
+      }
 
     filter() {  //case sensitive
         const queryCopy = {...this.queryStr};
