@@ -21,7 +21,7 @@ const Header = () => {
 
       <nav className="flex items-center space-x-6">
         <Link to="/bloghome" className="text-lg font-medium text-white hover:text-gray-300 transition duration-300 ease-in-out">Home</Link>
-        <Link to="/prodhome" className="text-lg font-medium text-white hover:text-gray-300 transition duration-300 ease-in-out">Product Home</Link>
+        <Link to="/prodhome" className="text-lg font-medium text-white hover:text-gray-300 transition duration-300 ease-in-out">Product </Link>
         <Link to="/myblogs" className="text-lg font-medium text-white hover:text-gray-300 transition duration-300 ease-in-out">My Blogs</Link>
         <Link to="/profile" className="hover:text-gray-300 transition duration-300 ease-in-out">
           <FaUser className="text-xl text-white hover:text-gray-300" />

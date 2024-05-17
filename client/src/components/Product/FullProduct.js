@@ -5,18 +5,19 @@ import ProdHeader from './prodHeader';
 import Footer from '../Footer';
 import { toast, Toaster } from 'react-hot-toast';
 
-
 function FullProduct() {
   const [product, setProduct] = useState(null);
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
   const { productId } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/products/${productId}`);
+        const response = await axios.get(`https://cuh-hub-server.vercel.app/api/products/${productId}`);
         setProduct(response.data.product);
         setUser(response.data.user);
+        setIsLoading(false); // Set loading to false after data is fetched
       } catch (error) {
         console.error('Error fetching product:', error);
       }
@@ -24,6 +25,11 @@ function FullProduct() {
 
     fetchProduct();
   }, [productId]);
+
+  // Show loading indicator if data is being fetched
+  if (isLoading) {
+    return <div className="h-screen flex justify-center items-center">Loading...</div>;
+  }
 
   if (!product || !user) {
     return <div>Loading...</div>;
@@ -44,8 +50,9 @@ function FullProduct() {
     // Open WhatsApp Web in a new tab
     window.open(whatsappUrl, '_blank');
   };
+
   return (
-    <section>
+    <section className="h-screen">
       <header>
         <ProdHeader />
       </header>
@@ -66,9 +73,6 @@ function FullProduct() {
             <p className="text-gray-600 text-sm mt-2">{product.description}</p>
             <p className="text-gray-700 font-semibold mt-2">Price: Rs {product.price}</p>
             <div className="mt-4 flex space-x-4">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Wishlist
-              </button>
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={handleChatButtonClick}>
                 Chat
               </button>

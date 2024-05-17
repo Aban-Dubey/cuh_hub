@@ -10,12 +10,14 @@ const FullBlog = () => {
   const [blog, setBlog] = useState(null);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [commentText, setCommentText] = useState('');
+  const [isLoading, setIsLoading] = useState(true); // Add isLoading state
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
         const foundBlog = await fetchBlogById(blogId);
         setBlog(foundBlog);
+        setIsLoading(false); // Set isLoading to false after data is fetched
       } catch (error) {
         console.error('Error fetching blog:', error);
       }
@@ -31,20 +33,20 @@ const FullBlog = () => {
   const handleCommentSubmit = async () => {
     const userId = localStorage.getItem('userId');
     try {
-      // Make a request to add the comment to the blog
       await addCommentToBlog(blogId, commentText, userId);
-
-      // Fetch the updated blog data after adding the comment
       const updatedBlog = await fetchBlogById(blogId);
       setBlog(updatedBlog);
     } catch (error) {
       console.error('Error adding comment:', error);
     }
   
-    // Toggle the form after submitting the comment
     toggleCommentForm();
   };
 
+  if (isLoading) { // Show loading state if data is being fetched
+    return <div className="h-screen flex justify-center items-center">Loading...</div>;
+  }
+  
   if (!blog) {
     return <p>Loading...</p>;
   }
@@ -54,7 +56,7 @@ const FullBlog = () => {
   const formattedTime = `${blogDate.toLocaleTimeString()}`;
 
   return (
-    <section>
+    <section className="h-screen">
       <header>
         <Header />
       </header>

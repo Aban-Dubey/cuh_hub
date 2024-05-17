@@ -14,7 +14,7 @@ const MyProducts = () => {
     // Fetch products data from the backend
     const fetchProductsData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/user/getUserById/66249b881dd0e4e10f8fd95f');
+        const response = await axios.get('https://cuh-hub-server.vercel.app/api/user/getUserById/66249b881dd0e4e10f8fd95f');
         setProducts(response.data.products);
       } catch (error) {
         toast.error('Error fetching products data');
@@ -26,9 +26,10 @@ const MyProducts = () => {
 
   // Function to handle product deletion
   const handleDeleteProduct = async (productId) => {
+    console.log(productId);
     try {
       // Delete the product from the backend
-      await axios.delete(`http://localhost:8080/api/products/${productId}`);
+      await axios.delete(`https://cuh-hub-server.vercel.app/api/products/${productId}`);
       toast.success("Product deleted successfully")
       // Update the products state after successful deletion
       setProducts(products.filter(product => product._id !== productId));

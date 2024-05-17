@@ -21,10 +21,10 @@ const ProdHeader = () => {
         <ul className="flex space-x-4">
           <li><Link to="/prodhome" className="hover:text-gray-300">Home</Link></li>
           <li>
-            <Link to="/bloghome" className="hover:text-gray-300">Blog Home</Link>
+            <Link to="/bloghome" className="hover:text-gray-300">Blog </Link>
           </li>
           <li><Link to="/myproducts" className="hover:text-gray-300">My Products</Link></li>
-          <li><Link to="#" className="hover:text-gray-300"><FaHeart className="text-xl text-white hover:text-gray-300" /></Link></li>
+      
           <li><Link to="/addproduct" className="hover:text-gray-300"><FaPlus className="text-xl text-white hover:text-gray-300" /></Link></li>
           <li>
             <Link to="/profile" className="hover:text-gray-300 transition duration-300 ease-in-out">

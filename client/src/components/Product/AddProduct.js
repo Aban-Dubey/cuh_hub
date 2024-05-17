@@ -65,7 +65,7 @@ const AddProduct = () => {
         };
 
         // Send the data to the server
-        const response = await axios.post('http://localhost:8080/api/products/new', dataToSend);
+        const response = await axios.post('https://cuh-hub-server.vercel.app/api/products/new', dataToSend);
         toast.success('Product added successfully');
       };
     } catch (error) {

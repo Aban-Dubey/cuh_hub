@@ -37,7 +37,7 @@ const UpdateProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8080/api/products/${prodId}`, product);
+      const response = await axios.put(`https://cuh-hub-server.vercel.app/api/products/${prodId}`, product);
       toast.success('Product updated successfully:');
       // Redirect user to MyProducts page or any other desired page
     } catch (error) {
