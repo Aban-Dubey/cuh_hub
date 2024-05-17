@@ -9,12 +9,13 @@ import { toast, Toaster } from 'react-hot-toast';
 const MyProducts = () => {
   // State to store products
   const [products, setProducts] = useState([]);
+  const user = localStorage.getItem('userId');
 
   useEffect(() => {
     // Fetch products data from the backend
     const fetchProductsData = async () => {
       try {
-        const response = await axios.get('https://cuh-hub-server.vercel.app/api/user/getUserById/66249b881dd0e4e10f8fd95f');
+        const response = await axios.get(`https://cuh-hub-server.vercel.app/api/user/getUserById/${user}`);
         setProducts(response.data.products);
       } catch (error) {
         toast.error('Error fetching products data');
