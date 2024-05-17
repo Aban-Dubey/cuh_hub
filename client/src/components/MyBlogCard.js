@@ -25,7 +25,7 @@ function MyBlogCard({ blog, onUpdate }) {
   const formattedTime = new Date(blog.timestamp).toLocaleTimeString();
 
   return (
-    <div className={`${styles.blogCard} mt-4 mr-4`}>
+    <div className={`${styles.blogCard} mt-4 mr-4 mb-10`}>
       <Link to={`/fullblog/${blogId}`}>
         <h3 className={styles.blogTitle}>{blog.title}</h3>
       </Link>

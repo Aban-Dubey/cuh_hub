@@ -29,7 +29,7 @@ const MyProductCard = ({ product, onDelete }) => {
             {/* Product Description */}
             <p className="mt-2 text-gray-500">{product.description}</p>
             {/* Product Price */}
-            <p className="mt-2 text-gray-500">Price: ${product.price}</p>
+            <p className="mt-2 text-gray-500">Price: Rs {product.price}</p>
           </div>
           {/* Buttons */}
           <div className="flex mt-4">

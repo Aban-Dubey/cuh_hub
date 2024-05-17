@@ -23,7 +23,7 @@ const MyProducts = () => {
     };
 
     fetchProductsData(); // Call the fetchProductsData function when the component mounts
-  }, []); // Empty dependency array ensures that the effect runs only once, similar to componentDidMount
+  }, [user]); // Empty dependency array ensures that the effect runs only once, similar to componentDidMount
 
   // Function to handle product deletion
   const handleDeleteProduct = async (productId) => {
